@@ -1,6 +1,6 @@
 // Contenu des pages du livre
 const pagesContent = [
-    "<h2>Page 1</h2><p>Ceci est le contenu de la première page du livre.</p>",
+    "<img src=\"./assets/00.png\"></img>",
     "<h2>Page 2</h2><p>Voici la deuxième page, affichée à côté de la première.</p>",
     "<h2>Page 3</h2><p>La troisième page arrive, avec plus de texte pour tester.</p>",
     "<h2>Page 4</h2><p>Dernière page, merci de lire ce petit livre.</p>",
