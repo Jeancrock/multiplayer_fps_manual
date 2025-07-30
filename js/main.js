@@ -1,53 +1,46 @@
-document.addEventListener("DOMContentLoaded", () => {
-    // Initialisation du PageFlip sur l'élément avec id "flipbook"
-    const pageFlip = new St.PageFlip(document.getElementById("flipbook"), {
-        width: 400,
-        height: 600,
-        size: "fixed",
-        minWidth: 315,
-        maxWidth: 1000,
-        minHeight: 420,
-        maxHeight: 1350,
-        maxShadowOpacity: 0.5,
-        showCover: true,
-        mobileScrollSupport: false,
-    });
-
-    const pages = [
-        "assets/00.png",
-        "assets/01.png",
-        "assets/02.png",
-        "assets/03.png",
-        "assets/04.png",
-    ];
-
-    // Crée les éléments div contenant les images et retourne une promesse
-    function createPageElement(src) {
-        return new Promise((resolve, reject) => {
-            const page = document.createElement("div");
-            page.classList.add("page");
-
-            const img = new Image();
-            img.src = src;
-            img.style.width = "100%";
-            img.style.height = "100%";
-
-            img.onload = () => {
-                page.appendChild(img);
-                resolve(page);
-            };
-            img.onerror = () => {
-                console.error(`Erreur chargement image : ${src}`);
-                // Résout quand même pour ne pas bloquer le chargement complet
-                resolve(page);
-            };
-        });
+// Contenu des pages du livre
+const pagesContent = [
+    "<h2>Page 1</h2><p>Ceci est le contenu de la première page du livre.</p>",
+    "<h2>Page 2</h2><p>Voici la deuxième page, affichée à côté de la première.</p>",
+    "<h2>Page 3</h2><p>La troisième page arrive, avec plus de texte pour tester.</p>",
+    "<h2>Page 4</h2><p>Dernière page, merci de lire ce petit livre.</p>",
+  ];
+  
+  // Indice de la page affichée à gauche
+  let currentPageIndex = 0;
+  
+  const pageLeft = document.getElementById("page-0");
+  const pageRight = document.getElementById("page-1");
+  const btnPrev = document.getElementById("prev");
+  const btnNext = document.getElementById("next");
+  
+  // Affiche deux pages en fonction de currentPageIndex
+  function renderPages() {
+    pageLeft.innerHTML = pagesContent[currentPageIndex] || "";
+    pageRight.innerHTML = pagesContent[currentPageIndex + 1] || "";
+  
+    // Désactiver les boutons si on est au début ou à la fin
+    btnPrev.disabled = currentPageIndex === 0;
+    btnNext.disabled = currentPageIndex + 2 >= pagesContent.length;
+  }
+  
+  // Gestion clic précédent
+  btnPrev.addEventListener("click", () => {
+    if (currentPageIndex > 0) {
+      currentPageIndex -= 2;
+      if (currentPageIndex < 0) currentPageIndex = 0;
+      renderPages();
     }
-
-    // Crée tous les éléments pages en attendant le chargement des images
-    Promise.all(pages.map(createPageElement))
-        .then((pageElements) => {
-            // Charge les pages dans PageFlip une fois toutes prêtes
-            pageFlip.loadFromHTML(pageElements);
-        });
-});
+  });
+  
+  // Gestion clic suivant
+  btnNext.addEventListener("click", () => {
+    if (currentPageIndex + 2 < pagesContent.length) {
+      currentPageIndex += 2;
+      renderPages();
+    }
+  });
+  
+  // Initialiser l'affichage
+  renderPages();
+  

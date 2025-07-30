@@ -1,17 +1,60 @@
-body {
-    font-family: sans-serif;
-    text-align: center;
-    background: #111;
-    color: white;
-    margin: 0;
-    padding: 1rem;
-  }
-  
-  .book {
-    margin: 0 auto;
-    width: 90vw;
-    max-width: 800px;
-    height: 90vh;
-    border: 1px solid #444;
-  }
-  
+/* Style du conteneur livre */
+#book {
+  width: 600px;
+  height: 400px;
+  margin: 40px auto;
+  perspective: 1500px;
+  display: flex;
+  box-shadow: 0 0 15px rgba(0,0,0,0.3);
+  border: 1px solid #ccc;
+  background: #f5f0e6;
+  user-select: none;
+}
+
+/* Chaque page */
+.page {
+  width: 50%;
+  height: 100%;
+  background: white;
+  border-left: 1px solid #aaa;
+  padding: 20px;
+  box-sizing: border-box;
+  position: relative;
+  backface-visibility: hidden;
+  overflow: auto;
+  font-family: Georgia, serif;
+  font-size: 18px;
+  line-height: 1.4;
+}
+
+/* La page de gauche n'a pas de bord gauche */
+#page-0 {
+  border-left: none;
+}
+
+/* Controls */
+#controls {
+  text-align: center;
+  margin-top: 20px;
+}
+
+#controls button {
+  background: #333;
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  margin: 0 10px;
+  font-size: 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background 0.3s;
+}
+
+#controls button:hover:not(:disabled) {
+  background: #555;
+}
+
+#controls button:disabled {
+  background: #aaa;
+  cursor: default;
+}

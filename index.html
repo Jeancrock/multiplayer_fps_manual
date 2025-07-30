@@ -2,17 +2,21 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Manuel du Jeu</title>
-  <link rel="stylesheet" href="css/style.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pageflip Livre</title>
+  <link rel="stylesheet" href="./css/style.css" />
 </head>
 <body>
-  <h1>Manuel du Jeu</h1>
+  <div id="book">
+    <div class="page" id="page-0"></div>
+    <div class="page" id="page-1"></div>
+  </div>
 
-  <div id="flipbook" class="book"></div>
+  <div id="controls">
+    <button id="prev" aria-label="Page précédente">←</button>
+    <button id="next" aria-label="Page suivante">→</button>
+  </div>
 
-  <!-- Import via CDN -->
-  <script src="https://cdn.jsdelivr.net/npm/page-flip/dist/js/page-flip.browser.min.js"></script>
-  <script src="js/main.js"></script>
+  <script src="./js/main.js"></script>
 </body>
 </html>
